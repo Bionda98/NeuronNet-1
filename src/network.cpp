@@ -128,3 +128,45 @@ void Network::print_traj(const int time, const std::map<std::string, size_t> &_n
             }
     (*_out) << std::endl;
 }
+
+std::set<size_t> Network::step(const std::vector<double>& step){
+	//problema
+	double mean;
+	double var;
+	for(auto v : step){
+		mean+=v;
+		}
+	mean=mean/step.size();	
+	std::set<size_t> t;
+	for(unsigned int i; i<step.size(); ++i){
+		var+=(step[i]-mean)*(step[i]-mean);
+		}
+	for(auto n : neurons){
+		n.step();
+		}
+	t.insert(var);
+	return t;
+	}
+	
+std::pair<size_t, double> Network::degree(const size_t& deg) const{
+	double sum;
+	std::vector<std::pair<size_t, double>> n_connection;
+	std::pair<size_t, double> d;
+	
+	n_connection = neighbors(deg);
+	for(auto it : n_connection){
+		sum+=it.second;
+		}
+	d=std::make_pair(n_connection.size(),sum);
+	return d;
+	}
+
+std::vector<std::pair<size_t, double> > Network::neighbors(const size_t& neigh) const{
+	 std::vector<std::pair<size_t, double>> v;
+	 for (auto const& [key, val] : links){
+		 if(key.first==neigh){
+			 v.push_back(std::make_pair(key.second,val));
+			 } 
+		 }
+	 return v;
+	}
