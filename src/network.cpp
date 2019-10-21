@@ -129,24 +129,35 @@ void Network::print_traj(const int time, const std::map<std::string, size_t> &_n
     (*_out) << std::endl;
 }
 
-std::set<size_t> Network::step(const std::vector<double>& step){
-	//problema
-	double mean;
-	double var;
-	for(auto v : step){
-		mean+=v;
-		}
-	mean=mean/step.size();	
+
+std::set<size_t> Network::step(const std::vector<double>& _step){
 	std::set<size_t> t;
-	for(unsigned int i; i<step.size(); ++i){
-		var+=(step[i]-mean)*(step[i]-mean);
+	for (size_t n = 0; n < size(); n++) {
+		if (neurons[n].firing()) {
+			t.insert(n);
+			neurons[n].reset();
 		}
-	for(auto n : neurons){
-		n.step();
-		}
-	t.insert(var);
-	return t;
 	}
+	for(size_t i=0 ; i<size() ; i++){
+		double Intensity = _step[i];
+		if (neurons[i].firing()) {
+			t.insert(i);
+			neurons[i].reset();
+		}
+		if (neurons[i].is_inhibitory()) Intensity *= 0.4;
+		auto n_connection = neighbors(i);
+		for (auto I = n_connection.begin(); I != n_connection.end(); I++) {
+			if(neurons[I->first].firing()){
+				Intensity += I->second;
+			}
+		}
+		neurons[i].input(Intensity);
+		neurons[i].step();
+	}
+	
+	return t;
+}
+	
 	
 std::pair<size_t, double> Network::degree(const size_t& deg) const{
 	double sum;
