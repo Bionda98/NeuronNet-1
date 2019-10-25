@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++17 -g -Wall -pedantic  -rdynamic CMakeFiles/NeuronNet.dir/src/main.cpp.o CMakeFiles/NeuronNet.dir/src/neuron.cpp.o CMakeFiles/NeuronNet.dir/src/network.cpp.o CMakeFiles/NeuronNet.dir/src/simulation.cpp.o CMakeFiles/NeuronNet.dir/src/random.cpp.o  -o NeuronNet  -L/home/bionda/myfiles/Programmation/NeuronNet-1/lib 

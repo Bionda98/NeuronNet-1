@@ -1,0 +1,6 @@
+/home/bionda/myfiles/Programmation/NeuronNet-1/build/CMakeFiles/test.dir
+/home/bionda/myfiles/Programmation/NeuronNet-1/build/CMakeFiles/doc.dir
+/home/bionda/myfiles/Programmation/NeuronNet-1/build/CMakeFiles/edit_cache.dir
+/home/bionda/myfiles/Programmation/NeuronNet-1/build/CMakeFiles/NeuronNet.dir
+/home/bionda/myfiles/Programmation/NeuronNet-1/build/CMakeFiles/rebuild_cache.dir
+/home/bionda/myfiles/Programmation/NeuronNet-1/build/CMakeFiles/TestNeuron.dir
