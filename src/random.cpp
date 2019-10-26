@@ -1,8 +1,10 @@
 #include "random.h"
 
 RandomNumbers::RandomNumbers(unsigned long int) {
-    std::random_device rd;
-    seed = rd();
+   if (seed == 0) {
+        std::random_device rd;
+        seed = rd();
+    }
     rng = std::mt19937(seed);
 }
 
