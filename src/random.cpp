@@ -8,8 +8,6 @@ RandomNumbers::RandomNumbers(unsigned long int) {
     rng = std::mt19937(seed);
 }
 
-
-
 void RandomNumbers::uniform_double(std::vector<double> &res, double lower, double upper) {
     std::uniform_real_distribution<> unif(lower, upper);
     for (auto I = res.begin(); I != res.end(); I++) *I = unif(rng);
