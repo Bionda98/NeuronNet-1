@@ -174,10 +174,15 @@ std::pair<size_t, double> Network::degree(const size_t& deg) const{
 
 std::vector<std::pair<size_t, double> > Network::neighbors(const size_t& neigh) const{
 	 std::vector<std::pair<size_t, double>> v;
-	 for (auto const& [key, val] : links){
+	 //original but slower
+	/*for (auto const& [key, val] : links){
 		 if(key.first==neigh){
 			 v.push_back(std::make_pair(key.second,val));
-			 } 
-		 }
+		 } 
+	}*/
+	//faster
+	for(std::map<std::pair<size_t, size_t>, double>::const_iterator it=links.lower_bound({neigh,0}); it!=links.cend() and (it->first).first == neigh; it++) {
+		v.push_back(std::make_pair((it->first).second, it->second));
+	}
 	 return v;
 	}
